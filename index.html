@@ -21,14 +21,13 @@ padding:20px;
 text-align:center;
 }
 
-.main-banner img{
-width:95%;
-max-width:420px;
-border-radius:15px;
-margin:15px 0;
+.top-links{
+margin-top:10px;
 }
 
-/* Category Tabs */
+.top-links button{
+margin:5px;
+}
 
 .tabs{
 display:flex;
@@ -46,14 +45,6 @@ border:none;
 border-radius:5px;
 cursor:pointer;
 }
-
-.tab-btn.active,
-.tab-btn:hover{
-background:#ffcc00;
-color:#111;
-}
-
-/* Products */
 
 .products{
 display:flex;
@@ -87,8 +78,6 @@ cursor:pointer;
 margin-top:10px;
 }
 
-/* Cart */
-
 .cart{
 background:#111;
 color:white;
@@ -99,22 +88,6 @@ max-width:400px;
 border-radius:12px;
 }
 
-/* Gallery */
-
-.gallery{
-padding:20px;
-display:flex;
-overflow-x:auto;
-gap:10px;
-}
-
-.gallery img{
-width:180px;
-border-radius:10px;
-}
-
-/* Contact */
-
 .contact{
 background:#222;
 color:#ffcc00;
@@ -124,12 +97,6 @@ width:90%;
 max-width:400px;
 border-radius:12px;
 }
-
-.contact a{
-color:#ffcc00;
-}
-
-/* WhatsApp Button */
 
 .whatsapp{
 position:fixed;
@@ -143,8 +110,6 @@ text-decoration:none;
 font-weight:bold;
 }
 
-/* Instagram Button */
-
 .instagram{
 position:fixed;
 bottom:80px;
@@ -157,30 +122,39 @@ text-decoration:none;
 font-weight:bold;
 }
 
-</style>
+.admin-panel{
+display:none;
+background:white;
+padding:20px;
+margin:20px;
+border-radius:10px;
+}
 
+</style>
 </head>
 
 <body>
 
 <header>
+
 <h1>Panther Charlie Apparels 🐆</h1>
 <p>Anime • Military • Casual • Jeans • Kurtis</p>
-</header>
 
-<div class="main-banner">
-<img src="banner.jpg">
+<div class="top-links">
+
+<button onclick="ownerLogin()">Owner Login</button>
+<button onclick="customerLogin()">Customer Login</button>
+<button onclick="trackOrder()">Track Order</button>
+
 </div>
+
+</header>
 
 <div class="tabs">
 
-<button class="tab-btn active" onclick="showCategory('all')">All</button>
+<button class="tab-btn" onclick="showCategory('all')">All</button>
 <button class="tab-btn" onclick="showCategory('anime')">Anime</button>
 <button class="tab-btn" onclick="showCategory('military')">Military</button>
-<button class="tab-btn" onclick="showCategory('men')">Men</button>
-<button class="tab-btn" onclick="showCategory('women')">Women</button>
-<button class="tab-btn" onclick="showCategory('jeans')">Jeans</button>
-<button class="tab-btn" onclick="showCategory('ethnic')">Kurti/Kurta</button>
 
 </div>
 
@@ -200,34 +174,6 @@ font-weight:bold;
 <button onclick="addToCart(850)">Add to Cart</button>
 </div>
 
-<div class="card" data-category="men">
-<img src="men-casual.jpg">
-<h3>Men Casual T-Shirt</h3>
-<p>₹699</p>
-<button onclick="addToCart(699)">Add to Cart</button>
-</div>
-
-<div class="card" data-category="women">
-<img src="women-top.jpg">
-<h3>Women Casual Top</h3>
-<p>₹749</p>
-<button onclick="addToCart(749)">Add to Cart</button>
-</div>
-
-<div class="card" data-category="jeans">
-<img src="jeans.jpg">
-<h3>Slim Fit Jeans</h3>
-<p>₹999</p>
-<button onclick="addToCart(999)">Add to Cart</button>
-</div>
-
-<div class="card" data-category="ethnic">
-<img src="kurti.jpg">
-<h3>Women Kurti</h3>
-<p>₹899</p>
-<button onclick="addToCart(899)">Add to Cart</button>
-</div>
-
 </div>
 
 <div class="cart">
@@ -238,18 +184,21 @@ font-weight:bold;
 
 <p id="total">Total: ₹0</p>
 
-<a id="paylink"><button>Pay via UPI</button></a>
+<button onclick="placeOrder()">Place Order</button>
 
 </div>
 
-<div class="gallery">
+<div class="admin-panel" id="adminPanel">
 
-<img src="naruto.jpg">
-<img src="army.jpg">
-<img src="men-casual.jpg">
-<img src="women-top.jpg">
-<img src="jeans.jpg">
-<img src="kurti.jpg">
+<h2>Admin Upload Mockup</h2>
+
+<input type="text" placeholder="Product Name"><br><br>
+
+<input type="number" placeholder="Price"><br><br>
+
+<input type="file"><br><br>
+
+<button>Upload Product</button>
 
 </div>
 
@@ -261,21 +210,22 @@ font-weight:bold;
 
 <p>📧 nandhasmart96@gmail.com</p>
 
-<p>📸 Instagram:
+<p>
+📸 Instagram
 <a href="https://instagram.com/panther_charlie_apparels" target="_blank">
 @panther_charlie_apparels
 </a>
 </p>
 
-</div>
+<br>
 
-<!-- Instagram Button -->
+<button onclick="reportProblem()">Report a Problem</button>
+
+</div>
 
 <a class="instagram" href="https://instagram.com/panther_charlie_apparels" target="_blank">
 Instagram
 </a>
-
-<!-- WhatsApp Button -->
 
 <a class="whatsapp" href="https://wa.me/918838050624">
 WhatsApp Order
@@ -289,33 +239,83 @@ let totalPrice = 0;
 function addToCart(price){
 
 cartItems++;
-
 totalPrice += price;
 
-document.getElementById("items").innerText = "Items: " + cartItems;
-
-document.getElementById("total").innerText = "Total: ₹" + totalPrice;
-
-document.getElementById("paylink").href =
-"upi://pay?pa=8838050624@upi&pn=Panther%20Charlie%20Apparels&am=" + totalPrice + "&cu=INR";
+document.getElementById("items").innerText="Items: "+cartItems;
+document.getElementById("total").innerText="Total: ₹"+totalPrice;
 
 }
 
 function showCategory(cat){
 
-const products = document.querySelectorAll('.card');
+const products=document.querySelectorAll(".card");
 
-products.forEach(p => {
+products.forEach(p=>{
 
-if(cat === "all"){
-p.style.display = "block";
-}
-
-else{
-p.dataset.category === cat ? p.style.display="block" : p.style.display="none";
+if(cat==="all"){
+p.style.display="block";
+}else{
+p.dataset.category===cat?p.style.display="block":p.style.display="none";
 }
 
 });
+
+}
+
+function ownerLogin(){
+
+let pass=prompt("Enter Owner Password");
+
+if(pass==="panther123"){
+
+alert("Welcome Owner");
+
+document.getElementById("adminPanel").style.display="block";
+
+}else{
+
+alert("Wrong Password");
+
+}
+
+}
+
+function customerLogin(){
+
+let email=prompt("Enter your email");
+
+if(email){
+
+alert("Welcome "+email);
+
+}
+
+}
+
+function placeOrder(){
+
+alert("Order Confirmed 🎉 \n\nThank you for choosing Panther Charlie Apparels 🐆");
+
+}
+
+function trackOrder(){
+
+let id=prompt("Enter Order ID");
+
+alert("Order "+id+" is Processing");
+
+}
+
+function reportProblem(){
+
+let issue=prompt("Describe the problem");
+
+if(issue){
+
+window.location.href=
+"mailto:nandhasmart96@gmail.com?subject=Website Problem&body="+issue;
+
+}
 
 }
 

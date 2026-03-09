@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panther Charlie Apparels</title>
+<style>
+/* BODY & GENERAL */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #f7f7f7 0%, #e6e6e6 100%);
+    text-align: center;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(90deg, #111 0%, #333 100%);
+    color: #ffcc00;
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+/* NAVIGATION */
+nav {
+    background: #222;
+    padding: 12px;
+}
+nav button {
+    background: #ffcc00;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+nav button:hover {
+    background: #fff200;
+    color: black;
+    transform: scale(1.1);
+}
+
+/* PRODUCTS GRID */
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background: #f0f0f0 url('background_texture.png') repeat;
+    border-radius: 15px;
+}
+
+/* PRODUCT CARD */
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    width: 200px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+button {
+    background: #ffcc00;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* CART SECTION */
+.cart {
+    background: #111;
+    color: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* FIXED BUTTONS */
+.whatsapp, .instagram {
+    position: fixed;
+    left: 20px;
+    padding: 12px 18px;
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+}
+.whatsapp { bottom: 20px; background: #25D366; }
+.instagram { bottom: 80px; background: #E1306C; }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .card { width: 45%; }
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Panther Charlie Apparels 🐆</h1>
+<p>Anime • Military • Casual • Kurtis • Kurtas • Jeans • Trendy</p>
+</header>
+
+<nav>
+<button onclick="showCategory('all')">All</button>
+<button onclick="showCategory('anime')">Anime</button>
+<button onclick="showCategory('military')">Military</button>
+<button onclick="showCategory('men')">Men Casual/Kurta</button>
+<button onclick="showCategory('women')">Women Casual/Kurti</button>
+<button onclick="showCategory('jeans')">Jeans</button>
+<button onclick="showCategory('trendy')">Trendy/H&M/Zara Style</button>
+<button onclick="showCategory('others')">Others</button>
+</nav>
+
+<div class="products">
+<!-- Example cards -->
+<div class="card" data-category="anime">
+<img src="MOCKUP_NARUTO.jpg">
+<h3>Naruto T-Shirt</h3>
+<p>₹899</p>
+<button onclick="addToCart(899)">Add to Cart</button>
+</div>
+
+<div class="card" data-category="military">
+<img src="MOCKUP_ARMY.jpg">
+<h3>Army T-Shirt</h3>
+<p>₹850</p>
+<button onclick="addToCart(850)">Add to Cart</button>
+</div>
+
+<div class="card" data-category="women">
+<img src="MOCKUP_KURTI.jpg">
+<h3>Women Kurti</h3>
+<p>₹899</p>
+<button onclick="addToCart(899)">Add to Cart</button>
+</div>
+
+<div class="card" data-category="jeans">
+<img src="MOCKUP_JEANS_MEN.jpg">
+<h3>Men Slim Fit Jeans</h3>
+<p>₹999</p>
+<button onclick="addToCart(999)">Add to Cart</button>
+</div>
+
+</div>
+
+<div class="cart">
+<h2>Cart</h2>
+<p id="items">Items: 0</p>
+<p id="total">Total: ₹0</p>
+<a id="paylink"><button>Pay via UPI</button></a>
+</div>
+
+<a class="whatsapp" href="https://wa.me/918838050624">WhatsApp</a>
+<a class="instagram" href="https://www.instagram.com/_charlie__collections___97/" target="_blank">Instagram</a>
+
+<script>
+let items = 0;
+let total = 0;
+
+function addToCart(price){
+    items++;
+    total += price;
+    document.getElementById("items").innerText = "Items: "+items;
+    document.getElementById("total").innerText = "Total: ₹"+total;
+    document.getElementById("paylink").href=
+        "upi://pay?pa=8838050624@upi&pn=Panther%20Charlie%20Apparels&am="+total+"&cu=INR";
+}
+
+function showCategory(cat){
+    let cards=document.querySelectorAll('.card');
+    cards.forEach(card=>{
+        if(cat==="all"){ card.style.display="block"; }
+        else{ card.dataset.category===cat ? card.style.display="block" : card.style.display="none"; }
+    });
+}
+</script>
+
+</body>
+</html>

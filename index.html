@@ -1,0 +1,246 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<title>Panther Charlie Apparels</title>  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<style>  
+/* General Styles */  
+body{  
+font-family:'Segoe UI', Arial, sans-serif;  
+background:#f7f7f7;  
+margin:0;  
+color:#333;  
+}  
+header{  
+background:#111;  
+color:#ffcc00;  
+padding:20px 10px;  
+text-align:center;  
+position: sticky;  
+top:0;  
+z-index: 100;  
+}  
+header h1{margin:0;font-size:1.8rem;}  
+header p{margin:5px;font-size:1rem;}  
+.main-banner img{  
+width:95%;  
+max-width:400px;  
+border-radius:15px;  
+margin:15px 0;  
+}  /* Category Tabs */
+.tabs{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+margin:20px 0;
+gap:10px;
+}
+.tab-btn{
+padding:10px 15px;
+background:#222;
+color:#ffcc00;
+border:none;
+border-radius:5px;
+cursor:pointer;
+transition:0.3s;
+}
+.tab-btn.active, .tab-btn:hover{
+background:#ffcc00;
+color:#111;
+}
+
+/* Products */
+.products{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+padding:10px;
+transition:0.3s;
+}
+.card{
+background:#fff;
+padding:15px;
+border-radius:12px;
+width:180px;
+box-shadow:0 2px 8px rgba(0,0,0,0.2);
+text-align:center;
+transition:0.3s;
+}
+.card:hover{
+transform:scale(1.05);
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+.card img{
+width:100%;
+border-radius:10px;
+}
+
+/* Buttons */
+button{
+padding:8px 12px;
+background:#ffcc00;
+color:#111;
+border:none;
+border-radius:5px;
+cursor:pointer;
+margin-top:10px;
+transition:0.2s;
+}
+button:hover{background:#e6b800;}
+
+/* Cart */
+.cart{
+background:#111;
+color:white;
+padding:20px;
+margin:20px auto;
+width:90%;
+max-width:400px;
+border-radius:12px;
+}
+.cart p{margin:8px 0;}
+
+/* Gallery */
+.gallery{
+padding:20px;
+display:flex;
+overflow-x:auto;
+gap:10px;
+}
+.gallery img{
+width:180px;
+border-radius:10px;
+}
+
+/* Contact & Delivery */
+.contact, .delivery{
+background:#222;
+color:#ffcc00;
+padding:20px;
+margin:20px auto;
+width:90%;
+max-width:400px;
+border-radius:12px;
+text-align:left;
+}
+.contact a, .delivery a{color:#ffcc00;text-decoration:none;}
+
+/* Responsive */
+@media(max-width:600px){
+.products, .gallery{flex-direction:column;align-items:center;}
+.tab-btn{flex:1;}
+}
+</style>
+
+</head>  
+<body>  <header>  
+<h1>Panther Charlie Apparels 🐆</h1>  
+<p>Anime • Casual • Kurtis • Jeans • Military (Optional)</p>  
+</header>  <!-- Banner -->  <div class="main-banner">  
+<img src="a_screenshot_of_panther_charlie_apparels_mobile.png" alt="Panther Charlie Apparels Mockup">  
+</div>  <!-- Category Tabs -->  <div class="tabs">  
+<button class="tab-btn active" onclick="showCategory('all')">All</button>  
+<button class="tab-btn" onclick="showCategory('tshirt')">T-Shirts</button>  
+<button class="tab-btn" onclick="showCategory('kurti')">Kurtis</button>  
+<button class="tab-btn" onclick="showCategory('jeans')">Jeans</button>  
+<button class="tab-btn" onclick="showCategory('military')">Military</button>  
+</div>  <!-- Products Section -->  <div class="products" id="products-container">  
+<!-- T-Shirts -->  
+<div class="card" data-category="tshirt">  
+<img src="https://via.placeholder.com/180x180?text=Naruto+Tshirt" alt="Naruto T-Shirt">  
+<h3>Naruto Anime T-Shirt</h3><p>₹899</p>  
+<select><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option></select>  
+<button onclick="addToCart(899)">Add to Cart</button>  
+</div>  
+<div class="card" data-category="tshirt">  
+<img src="https://via.placeholder.com/180x180?text=Casual+Tshirt" alt="Casual T-Shirt">  
+<h3>Casual T-Shirt</h3><p>₹699</p>  
+<select><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option></select>  
+<button onclick="addToCart(699)">Add to Cart</button>  
+</div>  <!-- Kurtis -->  <div class="card" data-category="kurti">  
+<img src="https://via.placeholder.com/180x180?text=Girls+Kurti" alt="Girls Kurti">  
+<h3>Girls Kurti</h3><p>₹799</p>  
+<select><option>S</option><option>M</option><option>L</option><option>XL</option></select>  
+<button onclick="addToCart(799)">Add to Cart</button>  
+</div>  <!-- Jeans -->  <div class="card" data-category="jeans">  
+<img src="https://via.placeholder.com/180x180?text=Men+Jeans" alt="Men Jeans">  
+<h3>Men's Jeans</h3><p>₹999</p>  
+<select><option>28</option><option>30</option><option>32</option><option>34</option><option>36</option></select>  
+<button onclick="addToCart(999)">Add to Cart</button>  
+</div>  
+<div class="card" data-category="jeans">  
+<img src="https://via.placeholder.com/180x180?text=Women+Jeans" alt="Women Jeans">  
+<h3>Women's Jeans</h3><p>₹949</p>  
+<select><option>28</option><option>30</option><option>32</option><option>34</option><option>36</option></select>  
+<button onclick="addToCart(949)">Add to Cart</button>  
+</div>  <!-- Military (Optional) -->  <div class="card" data-category="military">  
+<img src="https://via.placeholder.com/180x180?text=Navy+Tshirt" alt="Navy T-Shirt">  
+<h3>Navy T-Shirt</h3><p>₹850</p>  
+<select><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option></select>  
+<button onclick="addToCart(850)">Add to Cart</button>  
+</div>  
+<div class="card" data-category="military">  
+<img src="https://via.placeholder.com/180x180?text=Army+Tshirt" alt="Army T-Shirt">  
+<h3>Army T-Shirt</h3><p>₹850</p>  
+<select><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option></select>  
+<button onclick="addToCart(850)">Add to Cart</button>  
+</div>  
+<div class="card" data-category="military">  
+<img src="https://via.placeholder.com/180x180?text=Airforce+Tshirt" alt="Airforce T-Shirt">  
+<h3>Airforce T-Shirt</h3><p>₹850</p>  
+<select><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option></select>  
+<button onclick="addToCart(850)">Add to Cart</button>  
+</div>  </div>  <!-- Cart -->  <div class="cart">  
+<h2>🛒 Cart</h2>  
+<p id="items">Items: 0</p>  
+<p id="total">Total: ₹0</p>  
+<a id="paylink" href="#"><button>Pay via UPI</button></a>  
+</div>  <!-- Gallery -->  <div class="gallery">  
+<h2>Product Gallery</h2>  
+<img src="a_screenshot_of_panther_charlie_apparels_mobile.png" alt="Panther Charlie Mockup">  
+<img src="https://via.placeholder.com/180x180?text=Naruto+Tshirt">  
+<img src="https://via.placeholder.com/180x180?text=Casual+Tshirt">  
+<img src="https://via.placeholder.com/180x180?text=Girls+Kurti">  
+<img src="https://via.placeholder.com/180x180?text=Men+Jeans">  
+<img src="https://via.placeholder.com/180x180?text=Women+Jeans">  
+<img src="https://via.placeholder.com/180x180?text=Navy+Tshirt">  
+</div>  <!-- Contact -->  <div class="contact">  
+<h2>Contact Us</h2>  
+<p>📞 Phone: <a href="tel:8838050624">8838050624</a></p>  
+<p>📧 Email: <a href="mailto:nandhasmart96@gmail.com">nandhasmart96@gmail.com</a></p>  
+<p>📍 Store Location</p>  
+<a href="https://maps.app.goo.gl/q1H4qzgj7vxDyZ4h8"><button>Open Location</button></a>  
+</div>  <!-- Delivery -->  <div class="delivery">  
+<h2>🚚 Delivery Partner</h2>  
+<p>We ship orders across India using <strong>Delhivery</strong> courier service.</p>  
+<p>Estimated Delivery Time:</p>  
+<ul>  
+<li>Chennai: 1–2 days</li>  
+<li>Tamil Nadu: 2–4 days</li>  
+<li>India: 4–7 days</li>  
+</ul>  
+</div>  <script>  
+// Cart Logic  
+let cartItems = 0;  
+let totalPrice = 0;  
+function addToCart(price){  
+cartItems++;  
+totalPrice += price;  
+document.getElementById("items").innerText = "Items: " + cartItems;  
+document.getElementById("total").innerText = "Total: ₹" + totalPrice;  
+document.getElementById("paylink").href = "upi://pay?pa=8838050624@upi&pn=Panther%20Charlie%20Apparels&am=" + totalPrice + "&cu=INR";  
+}  
+  
+// Category Filter  
+function showCategory(cat){  
+const products = document.querySelectorAll('.products .card');  
+document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active'));  
+event.currentTarget.classList.add('active');  
+products.forEach(p=>{  
+if(cat==='all'){p.style.display='block';}  
+else{p.dataset.category===cat?p.style.display='block':p.style.display='none';}  
+});  
+}  
+</script>  </body>  
+  </html>

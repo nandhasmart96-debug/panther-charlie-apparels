@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Panther Charlie™</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#f4f4f4;
+}
+
+/* HEADER */
+
+header{
+background:black;
+color:#ffd700;
+padding:20px;
+text-align:center;
+}
+
+/* NAVIGATION */
+
+nav{
+background:#111;
+text-align:center;
+padding:10px;
+}
+
+nav button{
+background:#ffd700;
+border:none;
+margin:5px;
+padding:10px 15px;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* HERO BANNER */
+
+.hero{
+height:280px;
+background:url("BANNER.jpg") center/cover;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+font-size:30px;
+text-shadow:0 2px 5px black;
+}
+
+/* PRODUCTS */
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:30px;
+}
+
+.card{
+background:white;
+padding:15px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 4px 12px rgba(0,0,0,0.2);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+.card img{
+width:100%;
+border-radius:8px;
+}
+
+.card button{
+background:#ffd700;
+border:none;
+padding:10px;
+margin-top:10px;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* CART */
+
+.cart{
+background:black;
+color:white;
+margin:20px;
+padding:20px;
+border-radius:10px;
+text-align:center;
+}
+
+/* ORDER FORM */
+
+.order{
+background:white;
+margin:20px;
+padding:20px;
+border-radius:10px;
+text-align:center;
+}
+
+.order input{
+width:85%;
+padding:10px;
+margin:5px;
+}
+
+/* FLOAT BUTTONS */
+
+.whatsapp,.instagram{
+position:fixed;
+left:20px;
+padding:12px;
+border-radius:50px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+.whatsapp{
+bottom:20px;
+background:#25D366;
+}
+
+.instagram{
+bottom:70px;
+background:#E1306C;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Panther Charlie™ 🐆</h1>
+<p>Anime • Military • Casual • Kurtis • Jeans • Streetwear</p>
+</header>
+
+<nav>
+<button onclick="showCategory('all')">All</button>
+<button onclick="showCategory('anime')">Anime</button>
+<button onclick="showCategory('military')">Military</button>
+<button onclick="showCategory('men')">Men</button>
+<button onclick="showCategory('women')">Women</button>
+<button onclick="showCategory('jeans')">Jeans</button>
+</nav>
+
+<div class="hero">
+🔥 Premium Streetwear Collection
+</div>
+
+<div class="products">
+
+<div class="card" data-category="anime">
+<img src="naruto.jpg">
+<h3>Naruto T-Shirt</h3>
+<p>₹499</p>
+<button onclick="addToCart(499)">Add to Cart</button>
+</div>
+
+<div class="card" data-category="military">
+<img src="army.jpg">
+<h3>Military T-Shirt</h3>
+<p>₹499</p>
+<button onclick="addToCart(499)">Add to Cart</button>
+</div>
+
+<div class="card" data-category="men">
+<img src="kurta.jpg">
+<h3>Men Kurta</h3>
+<p>₹399</p>
+<button onclick="addToCart(399)">Add to Cart</button>
+</div>
+
+<div class="card" data-category="women">
+<img src="kurti.jpg">
+<h3>Women Kurti</h3>
+<p>₹449</p>
+<button onclick="addToCart(449)">Add to Cart</button>
+</div>
+
+<div class="card" data-category="jeans">
+<img src="jeans.jpg">
+<h3>Denim Jeans</h3>
+<p>₹799</p>
+<button onclick="addToCart(799)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="hoodie.jpg">
+<h3>Premium Hoodie</h3>
+<p>₹599</p>
+<button onclick="addToCart(599)">Add to Cart</button>
+</div>
+
+</div>
+
+<div class="cart">
+
+<h2>Cart</h2>
+
+<p id="items">Items: 0</p>
+<p id="total">Total: ₹0</p>
+
+<a id="paylink">
+<button>Pay via UPI</button>
+</a>
+
+</div>
+
+<div class="order">
+
+<h2>Delivery Details</h2>
+
+<input id="name" placeholder="Full Name"><br>
+<input id="phone" placeholder="Phone Number"><br>
+<input id="address" placeholder="Delivery Address"><br>
+<input id="pincode" placeholder="Pincode"><br>
+
+<button onclick="placeOrder()">Place Order</button>
+
+<p id="msg"></p>
+
+</div>
+
+<a class="whatsapp" href="https://wa.me/918838050624">WhatsApp</a>
+
+<a class="instagram"
+href="https://www.instagram.com/_charlie__collections___97/"
+target="_blank">Instagram</a>
+
+<script>
+
+let items=0
+let total=0
+
+function addToCart(price){
+
+items++
+total+=price
+
+document.getElementById("items").innerText="Items: "+items
+document.getElementById("total").innerText="Total: ₹"+total
+
+document.getElementById("paylink").href=
+"upi://pay?pa=8838050624@upi&pn=Panther%20Charlie&am="+total+"&cu=INR"
+
+}
+
+function showCategory(cat){
+
+let cards=document.querySelectorAll(".card")
+
+cards.forEach(card=>{
+
+if(cat==="all"){
+card.style.display="block"
+}
+else{
+card.dataset.category===cat
+? card.style.display="block"
+: card.style.display="none"
+}
+
+})
+
+}
+
+function placeOrder(){
+
+let name=document.getElementById("name").value
+let phone=document.getElementById("phone").value
+let address=document.getElementById("address").value
+let pincode=document.getElementById("pincode").value
+
+if(name==""||phone==""||address==""||pincode==""){
+alert("Please fill delivery details")
+return
+}
+
+document.getElementById("msg").innerHTML=
+"✅ Order placed successfully <br><br>"+
+"Thank you for choosing Panther Charlie 🐆 <br>"+
+"Our delivery partner Delhivery will ship your order soon."
+
+}
+
+</script>
+
+</body>
+</html>
+BANNER.jpg
+naruto.jpg
+army.jpg
+kurta.jpg
+kurti.jpg
+jeans.jpg
+hoodie.jpg
